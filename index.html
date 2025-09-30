@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React App</title>
+  <style>
+    /* Simple error overlay */
+    #__runtime_error_overlay__ { position: fixed; inset: 0; background: #fff; color: #b00020; padding: 1rem; white-space: pre-wrap; font-family: monospace; overflow: auto; z-index: 99999; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    (function() {
+      function showError(msg) {
+        var overlay = document.getElementById('__runtime_error_overlay__');
+        if (!overlay) {
+          overlay = document.createElement('pre');
+          overlay.id = '__runtime_error_overlay__';
+          document.body.appendChild(overlay);
+        }
+        overlay.textContent = msg;
+      }
+      window.addEventListener('error', function(e) {
+        var message = e.error && e.error.stack ? e.error.stack : e.message;
+        showError('Uncaught Error:\n' + message);
+      });
+      window.addEventListener('unhandledrejection', function(e) {
+        var message = e.reason && e.reason.stack ? e.reason.stack : e.reason;
+        showError('Unhandled Promise Rejection:\n' + message);
+      });
+    })();
+  </script>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+</html>
